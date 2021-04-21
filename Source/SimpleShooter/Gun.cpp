@@ -44,7 +44,9 @@ void AGun::PullTrigger()
 			)
 		)
 	{
-		DrawDebugPoint(GetWorld(), HitResult.Location, 20.f, FColor::Red, true);
+		// DrawDebugPoint(GetWorld(), HitResult.Location, 20.f, FColor::Red, true);
+		FVector ShotDirection = -OwnerRotation.Vector();
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, HitResult.Location, ShotDirection.Rotation());
 	}
 }
 
