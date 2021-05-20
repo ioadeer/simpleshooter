@@ -4,6 +4,18 @@
 #include "ShooterAIController.h"
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "ShooterCharacter.h"
+
+bool AShooterAIController::IsDead() const
+{
+	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(GetPawn());
+	if (ControlledCharacter != nullptr)
+	{
+		return ControlledCharacter->IsDead();
+	}
+	// si el ai controller no tiene pawn, entonces es como si estuviera muerto
+	return true;
+}
 
 void AShooterAIController::BeginPlay()
 {
