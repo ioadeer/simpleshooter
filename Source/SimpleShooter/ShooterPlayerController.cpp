@@ -5,10 +5,19 @@
 #include "TimerManager.h"
 #include "Blueprint/UserWidget.h"
 
+void AShooterPlayerController::BeginPlay() 
+{
+	Super::BeginPlay();
+	HeadsUpDisplay = CreateWidget(this, HUDScreenClass);
+	if (HeadsUpDisplay != nullptr)
+	{
+		HeadsUpDisplay->AddToViewport();
+	}
+}
 void AShooterPlayerController::GameHasEnded(AActor* EndGameFocus, bool bIsWinner)
 {
 	Super::GameHasEnded(EndGameFocus, bIsWinner); 
-
+	HeadsUpDisplay->RemoveFromViewport();
 	if (bIsWinner)
 	{
 		UUserWidget* WinScreen = CreateWidget(this, WinScreenClass);
